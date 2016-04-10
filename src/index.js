@@ -1,10 +1,16 @@
-import { render } from 'react-dom'
-import App from './components/app'
-
-
-
 import React from 'react'
-let el = React.createElement(App)
+import { createStore } from 'redux'
+import { render } from 'react-dom'
+import { Router, browserHistory } from 'react-router'
+import { Provider } from 'react-redux'
+
+import reducers from './reducers'
+import routes from './routes'
 
 
-render(el, document.getElementById('container'))
+render(
+    <Provider store={createStore(reducers)}>
+        <Router history={browserHistory} routes={routes} />
+    </Provider>
+    , document.getElementById('container')
+)
