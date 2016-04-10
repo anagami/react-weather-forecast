@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -9,14 +11,19 @@ import '../css/style.css'
 import SearchBar from '../components/SearchBar'
 import FavoriteMenu from '../components/FavoriteMenu'
 import HomeBar from '../components/HomeBar'
+import { detectLocation } from '../actions'
 
-export default class App extends Component {
+class App extends Component {
+    componentWillMount() {
+        this.props.detectLocation()
+    }
+
     render() {
         return <div>
             <nav className="navbar navbar-default navbar-fixed-top">
                 <div className="container">
                     <div class="navbar-header">
-                      <a className="navbar-brand" href="#">Weather App</a>
+                        <a className="navbar-brand" href="#">Weather App</a>
                     </div>
                     <SearchBar />
                     <FavoriteMenu />
@@ -37,8 +44,18 @@ export default class App extends Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        home: state.home,
+        favorites: state.favorites,
+        currentCity: state.dashboard
+    }
+}
 
+function mapDispatchToProps(dispatch) {
+    return {
+        detectLocation: bindActionCreators(detectLocation, dispatch)
+    }
+}
 
-
-
-
+export default connect(mapStateToProps, mapDispatchToProps)(App)
