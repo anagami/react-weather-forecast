@@ -1,0 +1,21 @@
+{
+  "name": "owm",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Your Name <you@example.com>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}
