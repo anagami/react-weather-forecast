@@ -1,15 +1,12 @@
 import { combineReducers } from 'redux';
 
-const INIT_STATE = {
-    favorites: [],
-    home: {},
-    dashboard: {}
 
-}
-
+import weatherReducer from './weather'
+import currentCityReducer from './currentCity'
 
 const rootReducer = combineReducers({
-  state: (state = INIT_STATE) => state
+    weather: weatherReducer,
+    currentCity: currentCityReducer
 });
 
-export default rootReducer;
+export default rootReducer

@@ -1,17 +1,15 @@
-import React, { Component } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-import 'bootstrap'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap/dist/css/bootstrap-theme.css'
+import 'bootstrap/dist/css/bootstrap.css';
 import '../css/style.css'
 
 
-import SearchBar from '../components/SearchBar'
-import FavoriteMenu from '../components/FavoriteMenu'
-import HomeBar from '../components/HomeBar'
-import { detectLocation } from '../actions'
+import SearchBar from '../components/SearchBar';
+import FavoriteMenu from '../components/FavoriteMenu';
+import HomeBar from '../components/HomeBar';
+import { detectLocation } from '../actions';
 
 class App extends Component {
     componentWillMount() {
@@ -19,14 +17,16 @@ class App extends Component {
     }
 
     render() {
+        let { favorites, home, dashboard, getWeather } = this.props
         return <div>
-            <nav className="navbar navbar-default navbar-fixed-top">
+            <nav className="navbar navbar-dark bg-primary navbar-fixed-top">
                 <div className="container">
-                    <div class="navbar-header">
+                    <div class="nav navbar-nav">
                         <a className="navbar-brand" href="#">Weather App</a>
+
+                        <SearchBar onSubmit={getWeather} />
+                        <FavoriteMenu items={favorites} />
                     </div>
-                    <SearchBar />
-                    <FavoriteMenu />
                 </div>
             </nav>
 
@@ -36,7 +36,7 @@ class App extends Component {
                         {this.props.children}
                     </div>
                     <div className="col-xs-6 col-sm-3">
-                        <HomeBar />
+                        <HomeBar city={home} />
                     </div>
                 </div>
             </div>
@@ -44,17 +44,21 @@ class App extends Component {
     }
 }
 
+
+
+
 function mapStateToProps(state) {
     return {
-        home: state.home,
-        favorites: state.favorites,
-        currentCity: state.dashboard
+        // home: state.home,
+        // dashboard: state.dashboard,
+        // favorites: state.favorites
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        detectLocation: bindActionCreators(detectLocation, dispatch)
+        detectLocation: bindActionCreators(detectLocation, dispatch),
+        // getWeather: bindActionCreators(getWeather, dispatch)
     }
 }
 
