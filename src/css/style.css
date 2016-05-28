@@ -1,6 +1,7 @@
 body {
     padding-top: 70px;
     padding-bottom: 20px;
+    overflow-y: scroll;
 }
 
 .search-form .input-group {
@@ -78,4 +79,9 @@ body {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
     }
+}
+
+
+.table-valign-middle td {
+    vertical-align: middle;
 }

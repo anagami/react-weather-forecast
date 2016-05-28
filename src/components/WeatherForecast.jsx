@@ -1,15 +1,51 @@
 import React, { Component } from 'react';
-// import formatDate from 'simple-format-date';
+import formatDate from 'simple-format-date';
 
 export default class WeatherForecast extends Component {
-    // formatDateAndTime(date, format='<%= hh %>:<%= mm %> <%= DD %>/<%= MM %>/<%= YY %>') {
-    //     return formatDate(new Date(date*1000), { template: format })
-    // }
-    render() {
-        return <div>
-            WeatherForecast
-        </div>
+    renderRow(data) {
+        let { dt, main: general, weather: clouds, wind } = data,
+            { main, description, icon } = clouds[0],
+            { pressure, humidity, temp_min, temp_max } = general,
+            { speed, deg, gust } = wind;
 
+        return <tr key={dt}>
+            <td>{formatDate(new Date(dt*1000), { template: '<%= hh %>:<%= mm %> <%= DD %>/<%= MM %>/<%= YY %>' })}</td>
+            <td className="text-xs-center" className="text-xs-center">{temp_min} - {temp_max}</td>
+            <td className="text-xs-center">
+                <img src={`http://openweathermap.org/img/w/${icon}.png`} alt={description} title={description} />
+            </td>
+            <td className="text-xs-center">{speed}</td>
+            <td className="text-xs-center">{humidity}</td>
+            <td className="text-xs-center">{pressure}</td>
+        </tr>
+    }
+    renderRows() {
+        let { weather } = this.props;
+
+        return weather.list.map(data => {
+            return this.renderRow(data);
+        })
+    }
+    render() {
+        let { name, country } = this.props.weather.city;
+        return <div>
+            <p className="lead">5 day / 3 hour weather forecast for {name}({country})</p>
+
+            <table className="table table-striped table-bordered table-valign-middle">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th className="text-xs-center">Temperature, &#8451;</th>
+                  <th className="text-xs-center">Clouds</th>
+                  <th className="text-xs-center">Wind, m/sec</th>
+                  <th className="text-xs-center">Humidity, %</th>
+                  <th className="text-xs-center">Pressure, hPa</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {this.renderRows()}
+              </tbody>
+            </table>
+        </div>
     }
 }
-
