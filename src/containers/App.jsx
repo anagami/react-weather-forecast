@@ -7,25 +7,28 @@ import '../css/style.css'
 
 
 import SearchBar from '../components/SearchBar';
-import FavoriteMenu from '../components/FavoriteMenu';
-import HomeBar from '../components/HomeBar';
-import { detectLocation } from '../actions';
+import FavoritesBar from '../components/FavoritesBar';
+import { detectLocation, getNow } from '../actions';
+import { getFavoritesList, selectFavorite, deleteFavorite } from '../actions/favorites';
 
 class App extends Component {
     componentWillMount() {
+        this.props.getFavoritesList()
         this.props.detectLocation()
     }
 
     render() {
-        let { favorites, home, dashboard, getWeather } = this.props
+        let { favorites, home, dashboard, getNow } = this.props
         return <div>
             <nav className="navbar navbar-dark bg-primary navbar-fixed-top">
                 <div className="container">
                     <div class="nav navbar-nav">
-                        <a className="navbar-brand" href="#">Weather App</a>
+                        <span className="navbar-brand">
+                            Weather App
+                            <span className="logo-icon"></span>
+                        </span>
 
-                        <SearchBar onSubmit={getWeather} />
-                        <FavoriteMenu items={favorites} />
+                        <SearchBar onSubmit={getNow} />
                     </div>
                 </div>
             </nav>
@@ -36,7 +39,7 @@ class App extends Component {
                         {this.props.children}
                     </div>
                     <div className="col-xs-6 col-sm-3">
-                        <HomeBar city={home} />
+                        <FavoritesBar favorites={favorites} selectFavorite={this.props.getNow} deleteFavorite={this.props.deleteFavorite} />
                     </div>
                 </div>
             </div>
@@ -45,20 +48,18 @@ class App extends Component {
 }
 
 
-
-
 function mapStateToProps(state) {
     return {
-        // home: state.home,
-        // dashboard: state.dashboard,
-        // favorites: state.favorites
+        favorites: state.favorites
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         detectLocation: bindActionCreators(detectLocation, dispatch),
-        // getWeather: bindActionCreators(getWeather, dispatch)
+        getNow: bindActionCreators(getNow, dispatch),
+        deleteFavorite: bindActionCreators(deleteFavorite, dispatch),
+        getFavoritesList: bindActionCreators(getFavoritesList, dispatch)
     }
 }
 

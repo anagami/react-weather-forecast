@@ -6,18 +6,18 @@ export default class SearchBar extends Component {
     }
 
     handleSubmit(e) {
-        e.preventDefault()
+        e.preventDefault();
 
-        this.props.onSubmit( this.state.query )
+        this.props.onSubmit(this.state.query, 'name');
         this.setState({
             query: ''
-        })
+        });
     }
 
     handleInputChange(e) {
         this.setState({
             query: e.target.value
-        })
+        });
     }
 
     render() {

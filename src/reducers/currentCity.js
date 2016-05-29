@@ -1,6 +1,4 @@
-import { WEATHER_NOW_RESPONSE } from '../actions'
-
-
+import { WEATHER_NOW_RESPONSE } from '../actions';
 
 export function getCurrentCityData(cityId, weatherData) {
     if ( !cityId || !weatherData) {
@@ -10,11 +8,14 @@ export function getCurrentCityData(cityId, weatherData) {
     }
 }
 
-
-export default function currentCity(state=null, action) {
+export default function currentCity(state={}, action) {
     switch(action.type) {
         case WEATHER_NOW_RESPONSE:
-            return action.payload.id;
+            return {
+                id: action.payload.id,
+                name: action.payload.name,
+                country: action.payload.sys.country
+            };
 
         default:
             return state;

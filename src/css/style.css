@@ -4,6 +4,25 @@ body {
     overflow-y: scroll;
 }
 
+.logo-icon {
+    display: inline-block;
+    background: url('../images/logo.svg');
+    width: 48px;
+    height: 38px;
+    margin: -7px 20px 0 0px;
+    vertical-align: middle;
+    transform: scale(0.7);
+}
+
+.delete-icon {
+    display: inline-block;
+    background: url('../images/delete.svg');
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+}
+
+
 .search-form .input-group {
     width: 600px;
 }
@@ -84,4 +103,9 @@ body {
 
 .table-valign-middle td {
     vertical-align: middle;
+}
+
+.ol-map {
+    height: 400px;
+    width: 100%;
 }

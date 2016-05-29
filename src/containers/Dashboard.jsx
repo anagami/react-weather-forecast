@@ -8,7 +8,9 @@ import WeatherMap from '../components/WeatherMap';
 import Loader from '../components/Loader';
 
 import { getCurrentCityData } from '../reducers/currentCity';
+import { searchInFavorites } from '../reducers/favorites';
 import { getForecast } from '../actions';
+import { setFavoritesList, deleteFavorite } from '../actions/favorites';
 
 class Dashboard extends Component {
     state = {
@@ -29,6 +31,16 @@ class Dashboard extends Component {
         });
     }
 
+    handlerClickFavorite(e) {
+        e.preventDefault();
+
+        if ( this.props.isFavorite ) {
+            this.props.deleteFavorite( this.props.currentCity );
+        } else {
+            this.props.setFavoritesList( this.props.currentCity );
+        }
+    }
+
     renderNowTab() {
         let { now } = this.props;
 
@@ -42,13 +54,13 @@ class Dashboard extends Component {
 
     }
     renderForecastTab() {
-        let { forecast, currentCityId } = this.props;
+        let { forecast, currentCity } = this.props;
 
         if ( this.state.tab == 'forecast' ) {
             if ( forecast ) {
                 return <WeatherForecast weather={forecast} />
             } else {
-                this.props.getForecast(currentCityId);
+                this.props.getForecast(currentCity.id);
 
                 return <Loader />
             }
@@ -58,7 +70,8 @@ class Dashboard extends Component {
         let { map } = this.props;
 
         if ( this.state.tab == 'map' ) {
-            if ( map ) {
+            // if ( map ) {
+            if ( 1 ) {
                 return <WeatherMap weather={map} />
             } else {
                 return <Loader />
@@ -66,7 +79,15 @@ class Dashboard extends Component {
         }
     }
     render() {
+        let { currentCity: {name, country}, isFavorite } = this.props;
+
         return <div>
+            <p className="lead">
+                {name}({country})
+                <span className={'btn btn-sm m-l-2 ' + (isFavorite ? 'btn-danger' : 'btn-success')} onClick={::this.handlerClickFavorite}>
+                    { isFavorite ? 'Remove from favorites' : 'Add to favorites' }
+                </span>
+            </p>
             <ul className="nav nav-tabs">
                 <li className="nav-item">
                     <a className={ 'nav-link' + (this.checkActiveTab('now')) } onClick={::this.handlerClickTab} href="#now">Now</a>
@@ -89,22 +110,26 @@ class Dashboard extends Component {
 }
 
 function mapStateToProps(state) {
-    let cityData = getCurrentCityData(state.currentCity, state.weather);
+    let cityData = getCurrentCityData(state.currentCity.id, state.weather),
+        isFavorite = searchInFavorites(state.currentCity.id, state.favorites);
 
     return {
         now: cityData.now,
         forecast: cityData.forecast,
         map: cityData.map,
-        currentCityId: state.currentCity
-    }
+        currentCity: state.currentCity,
+        isFavorite: isFavorite
+    };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        getForecast: bindActionCreators(getForecast, dispatch)
-    }
+        getForecast: bindActionCreators(getForecast, dispatch),
+        setFavoritesList: bindActionCreators(setFavoritesList, dispatch),
+        deleteFavorite: bindActionCreators(deleteFavorite, dispatch)
+    };
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
 

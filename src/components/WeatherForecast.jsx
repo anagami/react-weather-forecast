@@ -4,9 +4,9 @@ import formatDate from 'simple-format-date';
 export default class WeatherForecast extends Component {
     renderRow(data) {
         let { dt, main: general, weather: clouds, wind } = data,
-            { main, description, icon } = clouds[0],
+            { description, icon } = clouds[0],
             { pressure, humidity, temp_min, temp_max } = general,
-            { speed, deg, gust } = wind;
+            { speed } = wind;
 
         return <tr key={dt}>
             <td>{formatDate(new Date(dt*1000), { template: '<%= hh %>:<%= mm %> <%= DD %>/<%= MM %>/<%= YY %>' })}</td>
@@ -27,10 +27,7 @@ export default class WeatherForecast extends Component {
         })
     }
     render() {
-        let { name, country } = this.props.weather.city;
         return <div>
-            <p className="lead">5 day / 3 hour weather forecast for {name}({country})</p>
-
             <table className="table table-striped table-bordered table-valign-middle">
               <thead>
                 <tr>
