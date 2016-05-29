@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import WeatherNow from '../components/WeatherNow';
 import WeatherForecast from '../components/WeatherForecast';
-import WeatherMap from '../components/WeatherMap';
 import Loader from '../components/Loader';
 
 import { getCurrentCityData } from '../reducers/currentCity';
@@ -66,18 +65,6 @@ class Dashboard extends Component {
             }
         }
     }
-    renderMapTab() {
-        let { map } = this.props;
-
-        if ( this.state.tab == 'map' ) {
-            // if ( map ) {
-            if ( 1 ) {
-                return <WeatherMap weather={map} />
-            } else {
-                return <Loader />
-            }
-        }
-    }
     render() {
         let { currentCity: {name, country}, isFavorite } = this.props;
 
@@ -95,14 +82,10 @@ class Dashboard extends Component {
                 <li className="nav-item">
                     <a className={ 'nav-link' + (this.checkActiveTab('forecast')) } onClick={::this.handlerClickTab} href="#forecast">5 day Forecast</a>
                 </li>
-                <li className="nav-item">
-                    <a className={ 'nav-link' + (this.checkActiveTab('map')) } onClick={::this.handlerClickTab} href="#map">Map</a>
-                </li>
             </ul>
             <div className="p-t-2">
                 { this.renderNowTab() }
                 { this.renderForecastTab() }
-                { this.renderMapTab() }
             </div>
         </div>
 
@@ -116,7 +99,6 @@ function mapStateToProps(state) {
     return {
         now: cityData.now,
         forecast: cityData.forecast,
-        map: cityData.map,
         currentCity: state.currentCity,
         isFavorite: isFavorite
     };
@@ -132,4 +114,3 @@ function mapDispatchToProps(dispatch) {
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
-

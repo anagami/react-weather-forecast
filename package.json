@@ -35,7 +35,6 @@
   "dependencies": {
     "eslint-plugin-react": "",
     "fecha": "^2.1.0",
-    "openlayers": "^3.16.0",
     "react": "",
     "react-dom": "",
     "react-redux": "",
