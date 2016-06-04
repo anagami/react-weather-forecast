@@ -46,8 +46,7 @@ module.exports = {
             searchResolveModulesDirectories: false
         }),
         new webpack.ProvidePlugin({
-            'Promise': 'exports?global.Promise!es6-promise',
-            'fetch': 'exports?self.fetch!whatwg-fetch'
+            'Promise': 'exports?global.Promise!es6-promise'
         }),
         new ExtractTextPlugin('bundle.css', {allChunks: 1})
     ],

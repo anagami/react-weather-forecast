@@ -6,6 +6,9 @@
     "node": true,
     "es6": true
   },
+  "options": {
+    "mocha": true,
+  },
   "plugins": [
     "react"
   ],

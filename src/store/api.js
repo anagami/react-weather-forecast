@@ -1,5 +1,4 @@
-// import 'whatwg-fetch'
-// import Promise from 'promise-polyfill'
+import axios from 'axios';
 
 const API_KEY = '68bd4d4730e45df22e96d8af424cf055';
 const ROOT_URL = `http://api.openweathermap.org/data/2.5/`;
@@ -17,10 +16,20 @@ export default {
             reqUrl += `&${type}=${data}`;
         }
 
-        return fetch(reqUrl).then(res => res.json());
+        return axios.get(reqUrl);
     },
     forecast5(cityId) {
-        return fetch(`${ROOT_URL}forecast?${API_CONF}&id=${cityId}`).then(res => res.json());
+        return axios.get(`${ROOT_URL}forecast?${API_CONF}&id=${cityId}`);
+    },
+    getLocation() {
+        let promise = new Promise(function(resolve, reject) {
+                navigator.geolocation.getCurrentPosition(
+                    pos => resolve(pos.coords),
+                    () => reject()
+                );
+            });
+
+        return promise;
     },
     getFavorites() {
         let allRecords = JSON.parse( localStorage.getItem(LS_KEY) ) || [],

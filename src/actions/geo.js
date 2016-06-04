@@ -1,9 +1,7 @@
+import api from '../store/api';
+
 export const GEOLOCATION_SUPPORT = 'GEOLOCATION_SUPPORT';
 export const GEOLOCATION_ENABLED = 'GEOLOCATION_ENABLED';
-
-
-// import api from '../store/api';
-
 
 function supportGeoApi(state) {
     return {
@@ -14,7 +12,6 @@ function supportGeoApi(state) {
 
 
 function enabledGeoApi(state, coords={}) {
-    console.log('enabledGeoApi', coords)
     return {
         type: GEOLOCATION_ENABLED,
         payload: {
@@ -26,15 +23,16 @@ function enabledGeoApi(state, coords={}) {
 
 export function detectLocation() {
     return function(dispatch) {
-        if (navigator.geolocation) {
+        if (navigator && navigator.geolocation) {
             dispatch(supportGeoApi(true));
 
-            navigator.geolocation.getCurrentPosition(
-                pos => dispatch( enabledGeoApi(true, pos.coords) ),
-                () => dispatch( enabledGeoApi(false) )
-            );
+            return api.getLocation().then(response => {
+                    dispatch(enabledGeoApi(true, response));
+                }).catch(() => {
+                    dispatch(enabledGeoApi(false));
+                });
         } else {
-            dispatch(supportGeoApi(false));
+            return dispatch(supportGeoApi(false));
         }
     }
 }

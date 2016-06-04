@@ -1,11 +1,11 @@
+import api from '../store/api';
+
 export const FAVORITES_REQUEST = 'FAVORITES_REQUEST';
 export const FAVORITES_RESPONSE = 'FAVORITES_RESPONSE';
 export const FAVORITES_ADD_REQUEST = 'FAVORITES_ADD_REQUEST';
 export const FAVORITES_ADD_RESPONSE = 'FAVORITES_ADD_RESPONSE';
 export const FAVORITES_DELETE_REQUEST = 'FAVORITES_DELETE_REQUEST';
 export const FAVORITES_DELETE_RESPONSE = 'FAVORITES_DELETE_RESPONSE';
-
-import api from '../store/api';
 
 
 function favoritesRequest() {
@@ -25,7 +25,7 @@ export function getFavoritesList() {
     return function(dispatch) {
         dispatch(favoritesRequest());
 
-        api.getFavorites().then(response => {
+        return api.getFavorites().then(response => {
             dispatch(favoritesResponse(response));
         });
     };
@@ -48,7 +48,7 @@ export function setFavoritesList(city) {
     return function(dispatch) {
         dispatch(addFavoritesRequest());
 
-        api.setFavorites(city).then(response => {
+        return api.setFavorites(city).then(response => {
             dispatch(addFavoritesResponse(response));
         });
     };
@@ -72,7 +72,7 @@ export function deleteFavorite(city) {
     return function(dispatch) {
         dispatch(deleteFavoritesRequest());
 
-        api.deleteFavorites(city).then(response => {
+        return api.deleteFavorites(city).then(response => {
             dispatch(deleteFavoritesResponse(response));
         });
     };
