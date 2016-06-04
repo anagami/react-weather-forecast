@@ -9,7 +9,7 @@ export default class SearchBar extends Component {
         e.preventDefault();
 
         let { query } = this.state,
-            typeQuery = Number(query) ? 'zip' : 'name';
+            typeQuery = Number(query) ? 'zip' : 'q';
 
         this.props.onSubmit(query, typeQuery);
         this.setState({

@@ -8,18 +8,16 @@ const LS_KEY = 'openweather_favorites';
 
 
 export default {
-    now(data, type) {
-        switch(type) {
-            case 'coords':
-                return fetch(`${ROOT_URL}weather?${API_CONF}&lat=${data.latitude}&lon=${data.longitude}`).then(res => res.json());
-            case 'id':
-                return fetch(`${ROOT_URL}weather?${API_CONF}&id=${data}`).then(res => res.json());
-            case 'zip':
-                return fetch(`${ROOT_URL}weather?${API_CONF}&zip=${data}`).then(res => res.json());
-            case 'name':
-            default:
-                return fetch(`${ROOT_URL}weather?${API_CONF}&q=${data}`).then(res => res.json());
+    now(data, type='q') {
+        let reqUrl = `${ROOT_URL}weather?${API_CONF}`;
+
+        if ( type == 'coords' ) {
+            reqUrl += `&lat=${data.latitude}&lon=${data.longitude}`;
+        } else {
+            reqUrl += `&${type}=${data}`;
         }
+
+        return fetch(reqUrl).then(res => res.json());
     },
     forecast5(cityId) {
         return fetch(`${ROOT_URL}forecast?${API_CONF}&id=${cityId}`).then(res => res.json());
