@@ -5,10 +5,10 @@ import FavoriteCity from './FavoriteCity';
 
 export default class FavoritesBar extends Component {
     renderList() {
-        let { favorites } = this.props;
+        let { favorites, currentCity } = this.props;
 
         return <div className="list-group">
-            { favorites.map(city => <FavoriteCity {...city} key={city.id} selectFavorite={this.props.selectFavorite} deleteFavorite={this.props.deleteFavorite} />) }
+            { favorites.map(city => <FavoriteCity {...city} key={city.id} selectFavorite={this.props.selectFavorite} deleteFavorite={this.props.deleteFavorite} current={currentCity.id == city.id} />) }
         </div>
     }
 

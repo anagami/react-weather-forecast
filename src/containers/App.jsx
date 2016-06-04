@@ -29,7 +29,7 @@ class App extends Component {
     }
 
     render() {
-        let { favorites, home, dashboard, getNow } = this.props
+        let { favorites, home, dashboard, currentCity, getNow } = this.props
         return <div>
             <nav className="navbar navbar-dark bg-primary navbar-fixed-top">
                 <div className="container">
@@ -50,7 +50,7 @@ class App extends Component {
                         {this.props.children}
                     </div>
                     <div className="col-xs-6 col-sm-3">
-                        <FavoritesBar favorites={favorites} selectFavorite={this.props.getNow} deleteFavorite={this.props.deleteFavorite} />
+                        <FavoritesBar favorites={favorites} selectFavorite={this.props.getNow} deleteFavorite={this.props.deleteFavorite} currentCity={currentCity} />
                     </div>
                 </div>
             </div>
@@ -62,7 +62,8 @@ class App extends Component {
 function mapStateToProps(state) {
     return {
         favorites: state.favorites,
-        geo: state.geo
+        geo: state.geo,
+        currentCity: state.currentCity
     }
 }
 

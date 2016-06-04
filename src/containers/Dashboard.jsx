@@ -72,21 +72,20 @@ class Dashboard extends Component {
                 geo: {support: geo_support, enabled: geo_enabled}
             } = this.props;
 
-        if ( !geo_support ) {
-            return <div>
-                <p>Geolocation not support in your browser. Please use seacrh</p>
-            </div>
-        }
-
-
-        if ( !geo_enabled ) {
-            return <div>
-                <p>Geolocation disabled in your browser. Please use seacrh</p>
-            </div>
-        }
-
-
         if ( !id ) {
+            if ( !geo_support ) {
+                return <div>
+                    <p>Geolocation not support in your browser. Please use seacrh</p>
+                </div>
+            }
+
+
+            if ( !geo_enabled ) {
+                return <div>
+                    <p>Geolocation disabled in your browser. Please use seacrh</p>
+                </div>
+            }
+
             return <div></div>
         }
 
