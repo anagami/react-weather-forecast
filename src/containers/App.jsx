@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import 'bootstrap/dist/css/bootstrap.css';
-import '../css/style.css'
+import '../css/style.css';
 
 
 import SearchBar from '../components/SearchBar';
@@ -19,7 +19,12 @@ class App extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.getNowByCoords(nextProps.geo.coords);
+        let { longitude: longitude_next, latitude: latitude_next } = nextProps.geo.coords,
+            { longitude, latitude } = this.props.geo.coords;
+
+        if ( longitude_next != longitude || latitude_next != latitude ) {
+            this.getNowByCoords(nextProps.geo.coords);
+        }
     }
 
     getNowByCoords(coords) {

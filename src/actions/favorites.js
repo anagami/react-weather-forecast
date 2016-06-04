@@ -21,7 +21,6 @@ function favoritesResponse(data) {
     };
 }
 
-
 export function getFavoritesList() {
     return function(dispatch) {
         dispatch(favoritesRequest());
@@ -45,7 +44,6 @@ function addFavoritesResponse(data) {
     };
 }
 
-
 export function setFavoritesList(city) {
     return function(dispatch) {
         dispatch(addFavoritesRequest());
@@ -55,14 +53,6 @@ export function setFavoritesList(city) {
         });
     };
 }
-
-
-// export function selectFavorite(cityId) {
-//     return {
-//         type: FAVORITES_ADD_RESPONSE,
-//         payload: cityId
-//     };
-// }
 
 
 function deleteFavoritesRequest() {

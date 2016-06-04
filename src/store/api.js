@@ -44,7 +44,8 @@ export default {
         let allRecords = JSON.parse( localStorage.getItem(LS_KEY) ) || [],
             promise = new Promise(function(resolve) {
                 if ( allRecords.length ) {
-                    let index = allRecords.findIndex(c => c.id == city.id);
+                    let index = allRecords.map(c => c.id).indexOf(city.id);
+
                     allRecords.splice(index, 1);
                     localStorage.setItem(LS_KEY, JSON.stringify(allRecords));
                 }
