@@ -8,13 +8,24 @@ import '../css/style.css'
 
 import SearchBar from '../components/SearchBar';
 import FavoritesBar from '../components/FavoritesBar';
-import { detectLocation, getNow } from '../actions';
+import { detectLocation } from '../actions/geo';
+import { getNow } from '../actions/weather';
 import { getFavoritesList, selectFavorite, deleteFavorite } from '../actions/favorites';
 
 class App extends Component {
     componentWillMount() {
         this.props.getFavoritesList()
         this.props.detectLocation()
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.getNowByCoords(nextProps.geo.coords);
+    }
+
+    getNowByCoords(coords) {
+        if ( coords.longitude && coords.latitude ) {
+            this.props.getNow(coords, 'coords');
+        }
     }
 
     render() {
@@ -50,7 +61,8 @@ class App extends Component {
 
 function mapStateToProps(state) {
     return {
-        favorites: state.favorites
+        favorites: state.favorites,
+        geo: state.geo
     }
 }
 

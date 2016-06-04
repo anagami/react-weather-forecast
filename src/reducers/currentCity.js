@@ -1,4 +1,4 @@
-import { WEATHER_NOW_RESPONSE } from '../actions';
+import { WEATHER_NOW_RESPONSE } from '../actions/weather';
 
 export function getCurrentCityData(cityId, weatherData) {
     if ( !cityId || !weatherData) {

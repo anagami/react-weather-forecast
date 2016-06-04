@@ -6,7 +6,7 @@ import {
 
 
 export function searchInFavorites(cityId, favoritesList) {
-    return favoritesList.findIndex(c => c.id == cityId) >= 0;
+    return !!favoritesList.filter(c => c.id == cityId).length;
 }
 
 export default function favorites(state=[], action) {

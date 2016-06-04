@@ -8,7 +8,7 @@ import Loader from '../components/Loader';
 
 import { getCurrentCityData } from '../reducers/currentCity';
 import { searchInFavorites } from '../reducers/favorites';
-import { getForecast } from '../actions';
+import { getForecast } from '../actions/weather';
 import { setFavoritesList, deleteFavorite } from '../actions/favorites';
 
 class Dashboard extends Component {
@@ -66,7 +66,29 @@ class Dashboard extends Component {
         }
     }
     render() {
-        let { currentCity: {name, country}, isFavorite } = this.props;
+        let {
+                currentCity: {name, country, id},
+                isFavorite,
+                geo: {support: geo_support, enabled: geo_enabled}
+            } = this.props;
+
+        if ( !geo_support ) {
+            return <div>
+                <p>Geolocation not support in your browser. Please use seacrh</p>
+            </div>
+        }
+
+
+        if ( !geo_enabled ) {
+            return <div>
+                <p>Geolocation disabled in your browser. Please use seacrh</p>
+            </div>
+        }
+
+
+        if ( !id ) {
+            return <div></div>
+        }
 
         return <div>
             <p className="lead">
@@ -100,7 +122,8 @@ function mapStateToProps(state) {
         now: cityData.now,
         forecast: cityData.forecast,
         currentCity: state.currentCity,
-        isFavorite: isFavorite
+        isFavorite: isFavorite,
+        geo: state.geo
     };
 }
 

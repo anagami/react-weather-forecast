@@ -33,8 +33,11 @@
     "webpack-notifier": ""
   },
   "dependencies": {
+    "es6-promise": "^3.2.1",
     "eslint-plugin-react": "",
+    "exports-loader": "^0.6.3",
     "fecha": "^2.1.0",
+    "imports-loader": "^0.6.5",
     "react": "",
     "react-dom": "",
     "react-redux": "",

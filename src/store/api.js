@@ -1,4 +1,5 @@
-import 'whatwg-fetch'
+// import 'whatwg-fetch'
+// import Promise from 'promise-polyfill'
 
 const API_KEY = '68bd4d4730e45df22e96d8af424cf055';
 const ROOT_URL = `http://api.openweathermap.org/data/2.5/`;
@@ -22,12 +23,9 @@ export default {
         return fetch(`${ROOT_URL}forecast?${API_CONF}&id=${cityId}`).then(res => res.json());
     },
     getFavorites() {
-        let promise = new Promise(function(resolve) {
-                if ( localStorage.getItem(LS_KEY).length ) {
-                    resolve( JSON.parse( localStorage.getItem(LS_KEY) ) );
-                } else {
-                    resolve([]);
-                }
+        let allRecords = JSON.parse( localStorage.getItem(LS_KEY) ) || [],
+            promise = new Promise(function(resolve) {
+                resolve(allRecords);
             });
 
         return promise;

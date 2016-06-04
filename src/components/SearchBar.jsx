@@ -26,7 +26,7 @@ export default class SearchBar extends Component {
                 <input type="text" className="form-control" onChange={::this.handleInputChange} placeholder="Search city, zip or place" />
 
                 <span className="input-group-btn">
-                    <button type="button" className="btn btn-secondary-outline" type="button">Search</button>
+                    <button type="button" className="btn btn-secondary-outline" type="submit">Search</button>
                 </span>
             </div>
         </form>
