@@ -14,6 +14,8 @@ export default {
                 return fetch(`${ROOT_URL}weather?${API_CONF}&lat=${data.latitude}&lon=${data.longitude}`).then(res => res.json());
             case 'id':
                 return fetch(`${ROOT_URL}weather?${API_CONF}&id=${data}`).then(res => res.json());
+            case 'zip':
+                return fetch(`${ROOT_URL}weather?${API_CONF}&zip=${data}`).then(res => res.json());
             case 'name':
             default:
                 return fetch(`${ROOT_URL}weather?${API_CONF}&q=${data}`).then(res => res.json());
