@@ -1,7 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import formatDate from 'simple-format-date';
 
 export default class WeatherForecast extends Component {
+    static propTypes = {
+        weather: PropTypes.object.isRequired
+    }
+
     renderRow(data) {
         let { dt, main: general, weather: clouds, wind } = data,
             { description, icon } = clouds[0],
@@ -31,16 +35,16 @@ export default class WeatherForecast extends Component {
             <table className="table table-striped table-bordered table-valign-middle">
               <thead>
                 <tr>
-                  <th>Date</th>
-                  <th className="text-xs-center">Temperature, &#8451;</th>
-                  <th className="text-xs-center">Clouds</th>
-                  <th className="text-xs-center">Wind, m/sec</th>
-                  <th className="text-xs-center">Humidity, %</th>
-                  <th className="text-xs-center">Pressure, hPa</th>
+                    <th>Date</th>
+                    <th className="text-xs-center">Temperature, &#8451;</th>
+                    <th className="text-xs-center">Clouds</th>
+                    <th className="text-xs-center">Wind, m/sec</th>
+                    <th className="text-xs-center">Humidity, %</th>
+                    <th className="text-xs-center">Pressure, hPa</th>
                 </tr>
               </thead>
               <tbody>
-                  {this.renderRows()}
+                {this.renderRows()}
               </tbody>
             </table>
         </div>

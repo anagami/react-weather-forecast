@@ -1,6 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react';
 
 export default class FavoriteCity extends Component {
+    static propTypes = {
+        country: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        current: PropTypes.bool.isRequired,
+        deleteFavorite: PropTypes.func.isRequired,
+        selectFavorite: PropTypes.func.isRequired
+    }
+
     handleSetFavorite(e) {
         e.preventDefault();
 

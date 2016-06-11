@@ -1,15 +1,19 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { Component, PropTypes } from 'react';
 
 import FavoriteCity from './FavoriteCity';
 
 export default class FavoritesBar extends Component {
+    static propTypes = {
+        favorites: PropTypes.array,
+        currentCity: PropTypes.object.isRequired,
+        deleteFavorite: PropTypes.func.isRequired,
+        selectFavorite: PropTypes.func.isRequired
+    }
+
     renderList() {
         let { favorites, currentCity } = this.props;
 
-        return <div className="list-group">
-            { favorites.map(city => <FavoriteCity {...city} key={city.id} selectFavorite={this.props.selectFavorite} deleteFavorite={this.props.deleteFavorite} current={currentCity.id == city.id} />) }
-        </div>
+        return favorites.map(city => <FavoriteCity {...city} key={city.id} selectFavorite={this.props.selectFavorite} deleteFavorite={this.props.deleteFavorite} current={currentCity.id == city.id} />)
     }
 
     render() {
@@ -19,7 +23,9 @@ export default class FavoritesBar extends Component {
             { !this.props.favorites.length &&
                 <p>Save your favorites places</p>
             }
+            <div className="list-group">
             { !!this.props.favorites.length && this.renderList() }
+            </div>
         </div>
     }
 }

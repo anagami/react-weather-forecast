@@ -5,6 +5,5 @@ export default class Loader extends Component {
         return <div className="load-container">
             <div className="loader">Loading...</div>
         </div>
-
     }
 }

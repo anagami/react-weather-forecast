@@ -1,10 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import formatDate from 'simple-format-date';
 
 export default class WeatherNow extends Component {
-    formatDateAndTime(date, format='<%= hh %>:<%= mm %> <%= DD %>/<%= MM %>/<%= YY %>') {
-        return formatDate(new Date(date*1000), { template: format })
+    static propTypes = {
+        weather: PropTypes.object.isRequired
     }
+
+    formatDateAndTime(date, format='<%= hh %>:<%= mm %> <%= DD %>/<%= MM %>/<%= YY %>') {
+        return formatDate(new Date(date*1000), { template: format });
+    }
+
     render() {
         let { name, weather: clouds, dt, wind, sys, main: general } = this.props.weather,
             { main, description, icon } = clouds[0],
@@ -48,28 +53,5 @@ export default class WeatherNow extends Component {
                 </div>
             </div>
         </div>
-
     }
 }
-
-
-// Place
-// Downtown Toronto, CA
-
-// Temperature
-// 18°C (16°C - 20°C)
-
-// Description
-// mist
-
-// Humidity
-// 77%
-
-// Wind speed
-// 2 Mps
-
-// Sunrise
-// 12:40 AM
-
-// Sunset
-// 3:49 PM
