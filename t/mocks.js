@@ -121,7 +121,7 @@ export let responseForecastCity = {
         {
             dt: 1465657200,
             main: {},
-            weather: [],
+            weather: [{}],
             clouds: {},
             wind: {},
             rain: { },
@@ -131,7 +131,7 @@ export let responseForecastCity = {
         {
             dt: 1465668000,
             main: {},
-            weather: [],
+            weather: [{}],
             clouds: {},
             wind: {},
             rain: { },
@@ -141,7 +141,7 @@ export let responseForecastCity = {
         {
             dt: 1465678800,
             main: {},
-            weather: [],
+            weather: [{}],
             clouds: {},
             wind: {},
             rain: {},
@@ -151,7 +151,7 @@ export let responseForecastCity = {
         {
             dt: 1465689600,
             main: {},
-            weather: [],
+            weather: [{}],
             clouds: {},
             wind: {},
             rain: { },
