@@ -8,7 +8,7 @@ export function getCurrentCityData(cityId, weatherData) {
     }
 }
 
-export default function currentCity(state={}, action) {
+export default function currentCity(state={id: null, name: null, country: null}, action) {
     switch(action.type) {
         case WEATHER_NOW_RESPONSE:
             return {

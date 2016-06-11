@@ -16,6 +16,12 @@ class Dashboard extends Component {
         tab: 'now'
     }
 
+    componentWillUpdate(nextProps, nextState) {
+        if ( nextState.tab == 'forecast' && !nextProps.forecast ) {
+            this.props.getForecast(nextProps.currentCity.id);
+        }
+    }
+
     checkActiveTab(tabName) {
         return this.state.tab == tabName ? ' active' : '';
     }
@@ -59,8 +65,6 @@ class Dashboard extends Component {
             if ( forecast ) {
                 return <WeatherForecast weather={forecast} />
             } else {
-                this.props.getForecast(currentCity.id);
-
                 return <Loader />
             }
         }

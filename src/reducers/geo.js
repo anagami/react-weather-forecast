@@ -12,7 +12,6 @@ export default function geo(state={support: false, enabled: false, coords: {}}, 
             };
 
         case GEOLOCATION_ENABLED:
-            console.log(action)
             return {
                 ...state,
                 enabled: action.payload.state,

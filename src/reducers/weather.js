@@ -1,6 +1,5 @@
 import { WEATHER_NOW_RESPONSE, WEATHER_FORECAST_RESPONSE } from '../actions/weather'
 
-
 export default function weather(state={}, action) {
     let newState;
 
