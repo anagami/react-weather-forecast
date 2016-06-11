@@ -1,7 +1,6 @@
 var webpack = require('webpack');
 var WebpackNotifierPlugin = require('webpack-notifier');
 var ExtractTextPlugin = require ('extract-text-webpack-plugin');
-var BowerWebpackPlugin = require('bower-webpack-plugin')
 var path = require('path');
 
 module.exports = {
@@ -41,10 +40,6 @@ module.exports = {
     },
     plugins: [
         new WebpackNotifierPlugin(),
-        new BowerWebpackPlugin({
-            excludes: /.*\.less/,
-            searchResolveModulesDirectories: false
-        }),
         new webpack.ProvidePlugin({
             'Promise': 'exports?global.Promise!es6-promise'
         }),

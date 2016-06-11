@@ -5,7 +5,7 @@ import FavoriteCity from './FavoriteCity';
 export default class FavoritesBar extends Component {
     static propTypes = {
         favorites: PropTypes.array,
-        currentCity: PropTypes.object.isRequired,
+        currentCity: PropTypes.object,
         deleteFavorite: PropTypes.func.isRequired,
         selectFavorite: PropTypes.func.isRequired
     }
