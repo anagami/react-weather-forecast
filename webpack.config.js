@@ -1,3 +1,4 @@
+var NODE_ENV = process.env.NODE_ENV || 'development';
 var webpack = require('webpack');
 var WebpackNotifierPlugin = require('webpack-notifier');
 var ExtractTextPlugin = require ('extract-text-webpack-plugin');
@@ -8,7 +9,8 @@ module.exports = {
     entry: './index.js',
     output: {
         path: __dirname + '/public',
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        publicPath: '/public/'
     },
     resolve: {
         extensions: ['', '.js', '.jsx'],
@@ -43,9 +45,21 @@ module.exports = {
         new webpack.ProvidePlugin({
             'Promise': 'exports?global.Promise!es6-promise'
         }),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
+        }),
         new ExtractTextPlugin('bundle.css', {allChunks: 1})
     ],
     devServer: {
         port: 5555
     }
+}
+
+if ( NODE_ENV == 'production' ) {
+    module.exports.plugins.push(
+        new webpack.optimize.UglifyJsPlugin({
+            warnings: false,
+            drop_console: true
+        })
+    )
 }
