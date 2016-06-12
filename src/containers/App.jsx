@@ -12,7 +12,7 @@ import { detectLocation } from '../actions/geo';
 import { getNow } from '../actions/weather';
 import { getFavoritesList, selectFavorite, deleteFavorite } from '../actions/favorites';
 
-class App extends Component {
+export class App extends Component {
     componentWillMount() {
         this.props.getFavoritesList()
         this.props.detectLocation()
@@ -38,7 +38,7 @@ class App extends Component {
         return <div>
             <nav className="navbar navbar-dark bg-primary navbar-fixed-top">
                 <div className="container">
-                    <div class="nav navbar-nav">
+                    <div className="nav navbar-nav">
                         <span className="navbar-brand">
                             Weather App
                             <span className="logo-icon"></span>

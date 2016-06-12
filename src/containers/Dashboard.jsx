@@ -11,7 +11,7 @@ import { searchInFavorites } from '../reducers/favorites';
 import { getForecast } from '../actions/weather';
 import { setFavoritesList, deleteFavorite } from '../actions/favorites';
 
-class Dashboard extends Component {
+export class Dashboard extends Component {
     state = {
         tab: 'now'
     }
@@ -26,11 +26,7 @@ class Dashboard extends Component {
         return this.state.tab == tabName ? ' active' : '';
     }
 
-    handlerClickTab(e) {
-        e.preventDefault();
-
-        let currentTab = e.target.getAttribute('href').replace(/#/, '');
-
+    handlerClickTab(currentTab) {
         this.setState({
             tab: currentTab
         });
@@ -102,10 +98,10 @@ class Dashboard extends Component {
             </p>
             <ul className="nav nav-tabs">
                 <li className="nav-item">
-                    <a className={ 'nav-link' + (this.checkActiveTab('now')) } onClick={::this.handlerClickTab} href="#now">Now</a>
+                    <span className={ 'nav-link' + (this.checkActiveTab('now')) } onClick={() => this.handlerClickTab('now')}>Now</span>
                 </li>
                 <li className="nav-item">
-                    <a className={ 'nav-link' + (this.checkActiveTab('forecast')) } onClick={::this.handlerClickTab} href="#forecast">5 day Forecast</a>
+                    <span className={ 'nav-link' + (this.checkActiveTab('forecast')) } onClick={() => this.handlerClickTab('forecast')}>5 day Forecast</span>
                 </li>
             </ul>
             <div className="p-t-2">
